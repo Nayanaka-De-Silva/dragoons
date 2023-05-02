@@ -2,16 +2,25 @@
 
 namespace Components\PlayerCharacter;
 
+use Components\Defaults\Defaults;
+use Components\Race\Race;
 
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
 class PlayerCharacter {
   private string $playerName;
   private string $characterName;
-  //private Level $level;
 
-  public function __construct($playerName, $characterName)
-  {
+  private Race $race;
+
+  // Character basic properties
+  private int $age;
+  private float $height;
+  private float $weight;
+  private string $eyes;
+  private string $hair;
+
+  public function __construct(string $playerName, string $characterName, Race $race = null) {
     $this->playerName = $playerName;
     $this->characterName = $characterName;
   }
@@ -22,5 +31,49 @@ class PlayerCharacter {
 
   public function getCharacterName() {
     return $this->characterName;
+  }
+
+  // ----------------------------------------------------------------
+  // Race Methods
+
+  public function setRace(Race $race) {
+    $this->race = $race;
+    $this->setDefaultRaceProperties();
+  }
+
+  public function getRace() {
+    return $this->race;
+  }
+
+  // ----------------------------------------------------------------
+  // Basic Properties methods
+  public function setAge(int $age) {
+    $this->age = $age;
+  }
+  public function getAge(): int {
+    return $this->age;
+  }
+
+  public function setHeight(float $height) {
+    $this->height = $height;
+  }
+  public function getHeight(): float {
+    return $this->height;
+  }
+
+  public function setWeight(float $weight) {
+    $this->weight = $weight;
+  }
+  public function getWeight() {
+    return $this->weight;
+  }
+
+  // ----------------------------------------------------------------
+  // Private methods
+
+  private function setDefaultRaceProperties() {
+    $this->age    = $this->race->getDefaultAge();
+    $this->weight = $this->race->getDefaultWeight();
+    $this->height = $this->race->getDefaultHeight();
   }
 }

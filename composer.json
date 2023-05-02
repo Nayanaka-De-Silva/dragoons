@@ -2,7 +2,9 @@
   "description": "A D&D Dungeon Master Management Tool",
   "autoload": {
     "psr-4": {
-      "Components\\PlayerCharacter\\": "src/components/PlayerCharacter"
+      "Components\\PlayerCharacter\\": "src/components/PlayerCharacter",
+      "Components\\Race\\": "src/components/Race",
+      "Components\\Race\\Dwarf\\": "src/components/Race/Dwarf"
     }
   },
   "autoload-dev": {
