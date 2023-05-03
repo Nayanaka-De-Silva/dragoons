@@ -4,6 +4,7 @@ namespace Components\PlayerCharacter;
 
 use Components\Defaults\Defaults;
 use Components\Race\Race;
+use Components\CharacterClass\CharacterClass;
 
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
@@ -12,6 +13,7 @@ class PlayerCharacter {
   private string $characterName;
 
   private Race $race;
+  private array $classes;
 
   // Character basic properties
   private int $age;
@@ -46,7 +48,23 @@ class PlayerCharacter {
   }
 
   // ----------------------------------------------------------------
+  // Class Methods
+
+  public function setClass(CharacterClass $newClass): void {
+    $this->classes[] = $newClass;
+  }
+
+  public function getAllClasses(): array {
+    return $this->classes;
+  }
+
+  public function getClassByIndex(int $classIdx = 1): CharacterClass {
+    return $this->classes[$classIdx];
+  }
+
+  // ----------------------------------------------------------------
   // Basic Properties methods
+
   public function setAge(int $age) {
     $this->age = $age;
   }
