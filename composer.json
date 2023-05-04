@@ -7,7 +7,8 @@
       "Components\\Race\\Dwarf\\": "src/components/Race/Dwarf",
       "Components\\CharacterClass\\": "src/components/CharacterClass",
       "Components\\CharacterClass\\Fighter\\": "src/components/CharacterClass/Fighter",
-      "Components\\CharacterClass\\Bard\\": "src/components/CharacterClass/Bard"
+      "Components\\CharacterClass\\Bard\\": "src/components/CharacterClass/Bard",
+      "Components\\Abilities\\": "src/components/Abilities"
     }
   },
   "autoload-dev": {
