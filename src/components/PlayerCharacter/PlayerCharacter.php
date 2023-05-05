@@ -5,6 +5,7 @@ namespace Components\PlayerCharacter;
 use Components\Defaults\Defaults;
 use Components\Race\Race;
 use Components\CharacterClass\CharacterClass;
+use Components\Abilities\Abilities;
 
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
@@ -14,6 +15,8 @@ class PlayerCharacter {
 
   private Race $race;
   private array $classes;
+
+  private Abilities $abilities;
 
   // Character basic properties
   private int $age;
@@ -84,6 +87,16 @@ class PlayerCharacter {
   }
   public function getWeight() {
     return $this->weight;
+  }
+
+  // ----------------------------------------------------------------
+  // Abilities Methods
+  public function setAbilities(Abilities $abilities) {
+    $this->abilities = $abilities;
+  }
+
+  public function getAbilities() {
+    return $this->abilities;
   }
 
   // ----------------------------------------------------------------
