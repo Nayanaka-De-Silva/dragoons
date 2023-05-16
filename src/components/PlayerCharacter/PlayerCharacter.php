@@ -6,6 +6,7 @@ use Components\Defaults\Defaults;
 use Components\Race\Race;
 use Components\CharacterClass\CharacterClass;
 use Components\Abilities\Abilities;
+use Components\Level\Level;
 
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
@@ -15,8 +16,8 @@ class PlayerCharacter {
 
   private Race $race;
   private array $classes;
-
   private Abilities $abilities;
+  private Level $level;
 
   // Character basic properties
   private int $age;
@@ -97,6 +98,16 @@ class PlayerCharacter {
 
   public function getAbilities() {
     return $this->abilities;
+  }
+
+  // ----------------------------------------------------------------
+  // Level Methods
+  public function setLevel(Level $level) {
+    $this->level = $level;
+  }
+
+  public function getLevel() {
+    return $this->level;
   }
 
   // ----------------------------------------------------------------
