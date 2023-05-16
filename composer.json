@@ -8,7 +8,8 @@
       "Components\\CharacterClass\\": "src/components/CharacterClass",
       "Components\\CharacterClass\\Fighter\\": "src/components/CharacterClass/Fighter",
       "Components\\CharacterClass\\Bard\\": "src/components/CharacterClass/Bard",
-      "Components\\Abilities\\": "src/components/Abilities"
+      "Components\\Abilities\\": "src/components/Abilities",
+      "Components\\Level\\": "src/components/Level"
     }
   },
   "autoload-dev": {
