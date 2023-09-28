@@ -70,7 +70,7 @@ class PlayerCharacter {
 
   public function setAge(int $age): PlayerCharacter {
     $this->age = $age;
-    return $this
+    return $this;
   }
   public function getAge(): int {
     return $this->age;
