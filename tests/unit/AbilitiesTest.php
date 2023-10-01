@@ -80,7 +80,32 @@ class AbilitiesTest extends TestCase {
   }
 
   // ----------------------------------------------------------------
+
+  /**
+   * @dataProvider abilityScoreIncreaseProvider
+   */
+  public function testIfCanApplyAbilityScoreIncreaseToDexterityAbility($type, $amount): void {
+    $currentAbilityScore = $this->testAbilities->getAbilityScore($type);
+    $this->testAbilities->IncreaseAbilityScore($amount, $type);
+    $this->assertEquals($currentAbilityScore + $amount, $this->testAbilities->getAbilityScore($type));
+  }
+
+  // ----------------------------------------------------------------
   public function tearDown(): void {
     unset($this->testAbilities);
+  }
+
+  // ----------------------------------------------------------------
+
+  public static function abilityScoreIncreaseProvider(): array {
+    return [
+      ['DEX', 2],
+      ['STR', 4],
+      ['CON', 1],
+      ['CHA', 2],
+      ['INT', 2],
+      ['DEX', 3],
+      ['WIS', 2]
+    ];
   }
 }
