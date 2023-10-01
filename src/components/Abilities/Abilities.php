@@ -25,6 +25,49 @@ class Abilities {
   // ----------------------------------------------------------------
   // Ability Score Methods
 
+  public function IncreaseAbilityScore(int $amount, string $type) {
+    switch($type) {
+      case 'STR':
+        $this->strengthScore += $amount;
+        break;
+      case 'DEX':
+        $this->dexterityScore += $amount;
+        break;
+      case 'CON':
+        $this->constitutionScore += $amount;
+        break;
+      case 'INT':
+        $this->intelligenceScore += $amount;
+      case 'WIS':
+        $this->wisdomScore += $amount;
+        break;
+      case 'CHA':
+        $this->charismaScore += $amount;
+        break;
+      default:
+        throw new \Exception('Cannot find Ability Type');
+    }
+  }
+
+  public function getAbilityScore(string $type): int {
+    switch($type) {
+      case 'STR':
+        return $this->getStrengthScore();
+      case 'DEX':
+        return $this->getDexterityScore();
+      case 'CON':
+        return $this->getConstitutionScore();
+      case 'INT':
+        return $this->getIntelligenceScore();
+      case 'WIS':
+        return $this->getWisdomScore();
+      case 'CHA':
+        return $this->getCharismaScore();
+      default:
+        throw new \Exception("Cannot find Ability Type");
+    }
+  }
+
   public function getStrengthScore(): int {
     return $this->strengthScore;
   }
@@ -79,4 +122,6 @@ class Abilities {
   private function getModiferFromScore(int $score): int {
     return floor(($score - 10) / 2);
   }
+
+
 }
