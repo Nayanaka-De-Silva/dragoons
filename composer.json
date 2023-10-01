@@ -9,13 +9,17 @@
       "Components\\CharacterClass\\Fighter\\": "src/components/CharacterClass/Fighter",
       "Components\\CharacterClass\\Bard\\": "src/components/CharacterClass/Bard",
       "Components\\Abilities\\": "src/components/Abilities",
-      "Components\\Level\\": "src/components/Level"
+      "Components\\Level\\": "src/components/Level",
+      "Components\\CLIInterface\\": "src/components/CLiInterface"
     }
   },
   "autoload-dev": {
     "psr-4": {
       "Components\\Tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit tests --color"
   },
   "require-dev": {
     "phpunit/phpunit": "10.*"
