@@ -7,6 +7,7 @@ require_once(__DIR__.'/../../vendor/autoload.php');
 use PHPUnit\Framework\TestCase;
 use Components\PlayerCharacter\PlayerCharacter;
 use Components\Race\Dwarf\Dwarf;
+use Components\Size\Size;
 
 
 
@@ -37,6 +38,18 @@ class PlayerCharacterRaceTest extends TestCase {
 
   public function testIfCharactersDefaultHeightIsEqualToRaceDefaultAgeUponCreation(): void {
     $this->assertEquals($this->testPlayerCharacter->getHeight(), $this->testRace->getDefaultHeight());
+  }
+
+  public function testIfCharacterDefaultSizeIsEqualToRaceDefaultSizeUponCreation(): void {
+    $this->assertEquals($this->testPlayerCharacter->getSize(), $this->testRace->getDefaultSize());
+  }
+
+  public function testIfCharacterDefaultSizeAsAStringIsEqualToRaceDefaultSizeAsAStringUponCreation(): void {
+    $this->assertEquals($this->testPlayerCharacter->getSize(true), $this->testRace->getDefaultSize()->value);
+  }
+
+  public function testIfCharacterSizeObjectCanBeRetrieved() {
+    $this->assertInstanceOf(Size::class, $this->testPlayerCharacter->getSizeObject());
   }
 
   public function tearDown(): void {

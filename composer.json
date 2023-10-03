@@ -10,7 +10,8 @@
       "Components\\CharacterClass\\Bard\\": "src/components/CharacterClass/Bard",
       "Components\\Abilities\\": "src/components/Abilities",
       "Components\\Level\\": "src/components/Level",
-      "Components\\CLIInterface\\": "src/components/CLiInterface"
+      "Components\\Size\\": "src/components/Size",
+      "Components\\Size\\Sizes\\": "src/components/Size/Sizes"
     }
   },
   "autoload-dev": {
