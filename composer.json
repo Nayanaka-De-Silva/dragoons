@@ -11,7 +11,10 @@
       "Components\\Abilities\\": "src/components/Abilities",
       "Components\\Level\\": "src/components/Level",
       "Components\\Size\\": "src/components/Size",
-      "Components\\Size\\Sizes\\": "src/components/Size/Sizes"
+      "Components\\Size\\Sizes\\": "src/components/Size/Sizes",
+      "Components\\Speed\\": "src/components/Speed",
+      "Components\\Proficiencies\\": "src/components/Proficiencies"
+
     }
   },
   "autoload-dev": {
