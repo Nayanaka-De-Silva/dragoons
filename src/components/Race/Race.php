@@ -5,6 +5,8 @@ namespace Components\Race;
 
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
+use Components\Proficiencies\Proficiencies;
+
 abstract class Race {
   // Default properties
 
@@ -14,4 +16,7 @@ abstract class Race {
   abstract public function getDefaultWeight();
   abstract public function getDefaultHeight();
   abstract public function getDefaultSize();
+  abstract public function getDefaultSpeed();
+
+  abstract public function loadProficiencies(Proficiencies &$proficiencyObject);
 }

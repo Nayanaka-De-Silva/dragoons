@@ -6,8 +6,10 @@ use Components\Defaults\Defaults;
 use Components\Race\Race;
 use Components\CharacterClass\CharacterClass;
 use Components\Abilities\Abilities;
+use Components\Proficiencies\Proficiencies;
 use Components\Size\Size;
 use Components\Size\Sizes\Sizes;
+use Components\Speed\Speed;
 
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
@@ -18,6 +20,8 @@ class PlayerCharacter {
   private Race $race;
   private array $classes;
   private Abilities $abilities;
+  private Speed $speed;
+  private Proficiencies $proficiencies;
 
   // Character basic properties
   private int $age;
@@ -30,6 +34,7 @@ class PlayerCharacter {
   public function __construct(string $playerName, string $characterName, Race $race = null) {
     $this->playerName = $playerName;
     $this->characterName = $characterName;
+    $this->proficiencies = new Proficiencies();
   }
 
   public function getPlayerName() {
@@ -46,6 +51,7 @@ class PlayerCharacter {
   public function setRace(Race $race) {
     $this->race = $race;
     $this->setDefaultRaceProperties();
+    $this->race->loadProficiencies($this->proficiencies);
   }
 
   public function getRace() {
@@ -116,6 +122,18 @@ class PlayerCharacter {
   }
 
   // ----------------------------------------------------------------
+  // Speed Methods
+  public function getSpeed() {
+    return $this->speed;
+  }
+
+  // ----------------------------------------------------------------
+  // Proficiencies Methods
+  public function getProficiencies() {
+    return $this->proficiencies;
+  }
+
+  // ----------------------------------------------------------------
   // Private methods
 
   private function setDefaultRaceProperties() {
@@ -123,5 +141,6 @@ class PlayerCharacter {
     $this->weight = $this->race->getDefaultWeight();
     $this->height = $this->race->getDefaultHeight();
     $this->size   = new Size($this->race->getDefaultSize());
+    $this->speed  = new Speed($this->race->getDefaultSpeed());
   }
 }
