@@ -6,6 +6,8 @@ use Components\Defaults\Defaults;
 use Components\Race\Race;
 use Components\CharacterClass\CharacterClass;
 use Components\Abilities\Abilities;
+use Components\Size\Size;
+use Components\Size\Sizes\Sizes;
 
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
@@ -23,6 +25,7 @@ class PlayerCharacter {
   private float $weight;
   private string $eyes;
   private string $hair;
+  private Size $size;
 
   public function __construct(string $playerName, string $characterName, Race $race = null) {
     $this->playerName = $playerName;
@@ -92,6 +95,15 @@ class PlayerCharacter {
     return $this->weight;
   }
 
+  public function getSize(bool $asString = false) {
+    return !$asString ? $this->size->getSize() : $this->size->getSizeAsString();
+  }
+
+  public function getSizeObject() {
+    return $this->size;
+  }
+
+
   // ----------------------------------------------------------------
   // Abilities Methods
   public function setAbilities(Abilities $abilities): PlayerCharacter {
@@ -110,5 +122,6 @@ class PlayerCharacter {
     $this->age    = $this->race->getDefaultAge();
     $this->weight = $this->race->getDefaultWeight();
     $this->height = $this->race->getDefaultHeight();
+    $this->size   = new Size($this->race->getDefaultSize());
   }
 }

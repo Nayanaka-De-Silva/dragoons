@@ -13,4 +13,5 @@ abstract class Race {
   abstract public function getDefaultAge();
   abstract public function getDefaultWeight();
   abstract public function getDefaultHeight();
+  abstract public function getDefaultSize();
 }
