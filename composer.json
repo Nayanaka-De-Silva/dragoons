@@ -13,8 +13,8 @@
       "Components\\Size\\": "src/components/Size",
       "Components\\Size\\Sizes\\": "src/components/Size/Sizes",
       "Components\\Speed\\": "src/components/Speed",
-      "Components\\Proficiencies\\": "src/components/Proficiencies"
-
+      "Components\\Proficiencies\\": "src/components/Proficiencies",
+      "Components\\Spell\\": "src/components/Spell"
     }
   },
   "autoload-dev": {
