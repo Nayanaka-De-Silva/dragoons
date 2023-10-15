@@ -22,17 +22,17 @@ class Spell {
 	public function __construct(array $details) {
 		$this->name = $details['name'];
 		$this->desc = $details['desc'];
-		$this->higher_level = $details['higher_level'];
+		$this->higher_level = $details['higher_level'] ?? '';
 		$this->page = $details['page'];
 		$this->range = $details['range'];
-		$this->components = $details['components'];
-		$this->ritual = $details['ritual'];
+		$this->components = explode(", ", $details['components']);
+		$this->ritual = $details['ritual'] != "no" ? true : false;
 		$this->duration = $details['duration'];
-		$this->concentration = $details['concentration'];
+		$this->concentration = $details['concentration'] != "no" ? true : false;
 		$this->casting_time = $details['casting_time'];
-		$this->level = $details['level'];
+		$this->level = $details['level'] != "Cantrip" ? $details['level'][0] : 0;
 		$this->school = $details['school'];
-		$this->classes = $details['classes'];
+		$this->classes = explode(", ", $details['classes']);
 	}
 
 	public function getName() : string {

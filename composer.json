@@ -14,7 +14,8 @@
       "Components\\Size\\Sizes\\": "src/components/Size/Sizes",
       "Components\\Speed\\": "src/components/Speed",
       "Components\\Proficiencies\\": "src/components/Proficiencies",
-      "Components\\Spell\\": "src/components/Spell"
+      "Components\\Spell\\": "src/components/Spell",
+      "Components\\Spellbook\\": "src/components/Spellbook"
     }
   },
   "autoload-dev": {

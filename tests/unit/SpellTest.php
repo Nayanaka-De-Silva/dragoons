@@ -14,14 +14,29 @@ class SpellTest extends TestCase {
 		"higher_level" => "When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.",
 		"page" => "phb 257",
 		"range" => "120 feet",
-		"components" => array("V", "S"),
-		"ritual" => false,
+		"components" => "V, S",
+		"ritual" => "no",
 		"duration" => "Instantaneous",
-		"concentration" => false,
+		"concentration" => "no",
 		"casting_time" => "1 action",
-		"level" => 1,
+		"level" => "1",
 		"school" => "Evocation",
-		"classes" => array("Sorcerer", "Wizard")
+		"classes" => "Sorcerer, Wizard"
+	);
+
+	protected array $testCantrip = array (
+		"name" => "Acid Splash",
+		"desc" => "<p>You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a dexterity saving throw or take 1d6 acid damage.</p> <p>This spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).</p>",
+		"page" => "phb 211",
+		"range" =>  "60 feet",
+		"components" => "V, S",
+		"ritual" => "no",
+		"duration" => "Instantaneous",
+		"concentration" => "no",
+		"casting_time" => "1 action",
+		"level" => "Cantrip",
+		"school" => "Conjuration",
+		"classes" => "Sorcerer, Wizard"
 	);
 
   // ----------------------------------------------------------------
@@ -50,11 +65,11 @@ class SpellTest extends TestCase {
 	}
 
 	public function testIfCanGetSpellComponenets() {
-		$this->assertEquals($this->testSpellDetails['components'], $this->testSpell->getComponents());
+		$this->assertEquals(explode(", ", $this->testSpellDetails['components']), $this->testSpell->getComponents());
 	}
 
 	public function testIfCanGetIfSpellIsRitual() {
-		$this->assertEquals($this->testSpellDetails['ritual'], $this->testSpell->getRitual());
+		$this->assertEquals($this->testSpellDetails['ritual'] != "no" ? true : false, $this->testSpell->getRitual());
 	}
 
 	public function testIfCanGetSpellDuration() {
@@ -62,7 +77,7 @@ class SpellTest extends TestCase {
 	}
 
 	public function testIfCanGetIfSpellRequiresConcentration() {
-		$this->assertEquals($this->testSpellDetails['concentration'], $this->testSpell->getConcentration());
+		$this->assertEquals($this->testSpellDetails['concentration'] != "no" ? true : false, $this->testSpell->getConcentration());
 	}
 
 	public function testIfCanGetCastingTime() {
@@ -78,7 +93,11 @@ class SpellTest extends TestCase {
 	}
 
 	public function testIfCanGetSpellClasses() {
-		$this->assertEquals($this->testSpellDetails['classes'], $this->testSpell->getClasses());
+		$this->assertEquals(explode(", ", $this->testSpellDetails['classes']), $this->testSpell->getClasses());
+	}
+
+	public function testIfCanLoadACantrip() {
+		$this->assertInstanceOf(Spell::class, new Spell($this->testCantrip));
 	}
 
   // ----------------------------------------------------------------
