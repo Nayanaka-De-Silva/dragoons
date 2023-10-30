@@ -100,6 +100,25 @@ class SpellTest extends TestCase {
 		$this->assertInstanceOf(Spell::class, new Spell($this->testCantrip));
 	}
 
+	public function testIfCanPrintLoadedSpellAsArray() {
+		$testSpellArray = array(
+			"name" => "Magic Missile",
+			"desc" => "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.",
+			"higher_level" => "When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.",
+			"page" => "phb 257",
+			"range" => "120 feet",
+			"components" => array("V", "S"),
+			"ritual" => false,
+			"duration" => "Instantaneous",
+			"concentration" => false,
+			"casting_time" => "1 action",
+			"level" => "1",
+			"school" => "Evocation",
+			"classes" => array("Sorcerer", "Wizard")
+		);
+		$this->assertEquals($testSpellArray, $this->testSpell->getSpellAsArray());
+	}
+
   // ----------------------------------------------------------------
   public function tearDown(): void {
     unset($this->testSpell);
