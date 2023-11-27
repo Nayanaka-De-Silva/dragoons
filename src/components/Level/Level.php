@@ -29,6 +29,8 @@ class Level {
     foreach (array_reverse(Level::$levelsArray, true) as $level => $levelInfo) {
       if ($level != 1 && $this->experiencePoints >= $levelInfo['experience_points']) 
         return $level;
+      else if ($level == 1 && $this->experiencePoints >= $levelInfo['experience_points'])
+        return $level;
     }
     throw new \Exception("Level not found based on current experience points");
   }
