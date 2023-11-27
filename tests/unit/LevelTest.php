@@ -42,6 +42,9 @@ class LevelTest extends TestCase {
   // ----------------------------------------------------------------
   public static function levelsProvider(): array {
     return [
+      [10,      1, 2],
+      [400,     2, 2],
+      [1200,    3, 2],
       [2800,    4, 2],
       [23485,   7, 3],
       [309485, 19, 6],

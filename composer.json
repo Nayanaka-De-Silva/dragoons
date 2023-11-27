@@ -15,7 +15,9 @@
       "Components\\Speed\\": "src/components/Speed",
       "Components\\Proficiencies\\": "src/components/Proficiencies",
       "Components\\Spell\\": "src/components/Spell",
-      "Components\\Spellbook\\": "src/components/Spellbook"
+      "Components\\Spellbook\\": "src/components/Spellbook",
+      "Components\\Dice\\": "src/components/Dice",
+      "Components\\Dice\\DiceTypes\\": "src/components/Dice/DiceTypes"
     }
   },
   "autoload-dev": {
