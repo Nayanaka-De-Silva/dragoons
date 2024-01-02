@@ -5,12 +5,15 @@ namespace Components\Spellbook;
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
 use Components\Spell\Spell;
+use Components\JSONImporter\JSONImporter;
+use Exception;
 
 class Spellbook {
 	private array $spellList;
+	private string $spellPath = __DIR__.'/spells.json';
 
 	public function __construct() {
-		$spellArray = $this->importSpellsFromJSON();
+		$spellArray = JSONImporter::importFromJSON($this->spellPath);
 		$this->spellList = $this->loadSpellsFromSpellArray($spellArray);
 	}
 
@@ -19,14 +22,6 @@ class Spellbook {
 	}
 
 	// -----------------------------------------------------------------
-
-	private function importSpellsFromJSON() : array {
-    $jsonString = file_get_contents(__DIR__ . '/spells.json');
-
-    $spellData = json_decode($jsonString, true);
-  
-    return $spellData;
-  }
 
 	private function loadSpellsFromSpellArray(array $spellArray) : array {
 		$spellList = array();

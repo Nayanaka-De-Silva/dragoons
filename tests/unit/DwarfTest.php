@@ -5,7 +5,7 @@ namespace Components\Test\Unit;
 require_once(__DIR__ . '/../../vendor/autoload.php');
 
 use PHPUnit\Framework\TestCase;
-use Components\Race\Dwarf\Dwarf;
+use Components\Race\Dwarf;
 
 class DwarfTest extends TestCase {
   

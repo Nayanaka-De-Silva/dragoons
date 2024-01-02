@@ -10,6 +10,7 @@ use Components\Proficiencies\Proficiencies;
 use Components\Size\Size;
 use Components\Size\Sizes\Sizes;
 use Components\Speed\Speed;
+use Components\Traits\Traits;
 
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
@@ -22,6 +23,7 @@ class PlayerCharacter {
   private Abilities $abilities;
   private Speed $speed;
   private Proficiencies $proficiencies;
+  private array $traits;
 
   // Character basic properties
   private int $age;
@@ -31,10 +33,11 @@ class PlayerCharacter {
   private string $hair;
   private Size $size;
 
-  public function __construct(string $playerName, string $characterName, Race $race = null) {
+  public function __construct(string $playerName, string $characterName) {
     $this->playerName = $playerName;
     $this->characterName = $characterName;
     $this->proficiencies = new Proficiencies();
+    $this->traits = array();
   }
 
   public function getPlayerName() {
@@ -52,6 +55,7 @@ class PlayerCharacter {
     $this->race = $race;
     $this->setDefaultRaceProperties();
     $this->race->loadProficiencies($this->proficiencies);
+    $this->race->loadTraits($this->traits);
   }
 
   public function getRace() {
@@ -72,6 +76,15 @@ class PlayerCharacter {
 
   public function getClassByIndex(int $classIdx = 0): CharacterClass {
     return $this->classes[$classIdx];
+  }
+  // ----------------------------------------------------------------
+  // Traits
+  public function getTraits() : array {
+    return $this->traits;
+  }
+
+  public function getTraitFromName(string $name) {
+    return $this->traits[$name]['trait'];
   }
 
   // ----------------------------------------------------------------

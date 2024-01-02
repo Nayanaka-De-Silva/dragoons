@@ -2,11 +2,14 @@
 
 namespace Components\Level;
 
+use Components\JSONImporter\JSONImporter;
+
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
 class Level {
   // Default properties
   private int $experiencePoints;
+  private string $levelsFilePath = __DIR__ . '/levels.json';
 
   static private array $levelsArray = array();
 
@@ -14,7 +17,7 @@ class Level {
     $this->experiencePoints = $experiencePoints;
     
     if (empty($this->levelsArray)) {
-      Level::$levelsArray = $this->importLevelsFromJSON();
+      Level::$levelsArray = JSONImporter::importFromJSON($this->levelsFilePath);
     }
   }
   
@@ -37,13 +40,5 @@ class Level {
 
   public function getCurrentProficiencyBonus() : int {
     return Level::$levelsArray[$this->getCurrentLevel()]['proficiency'];
-  }
-
-  private function importLevelsFromJSON() : array {
-    $jsonString = file_get_contents(__DIR__ . '/levels.json');
-
-    $levelData = json_decode($jsonString, true);
-  
-    return $levelData;
   }
 }

@@ -1,13 +1,15 @@
 <?php
 
-namespace Components\Race\Dwarf;
+namespace Components\Race;
 
-require_once(__DIR__ . '/../../../../vendor/autoload.php');
+require_once(__DIR__ . '/../../../vendor/autoload.php');
 
 use Components\Proficiencies\Proficiencies;
 use Components\Race\Race;
-use Components\Size\Size;
 use Components\Size\Sizes\Sizes;
+use Components\Traits\Darkvision;
+use Components\Traits\DwarvenResilience;
+use Components\Traits\Stonecunning;
 
 class Dwarf extends Race {
   // Class Defaults
@@ -61,6 +63,16 @@ class Dwarf extends Race {
 
     $proficiencyObject->addLanguageProficiency("Common", "Dwarven Language Proficiency");
     $proficiencyObject->addLanguageProficiency("Dwarvish", "Dwarven Language Proficiency");
+  }
+
+  public function loadTraits(array &$traits) {
+    $history = 'Dwarven Race Traits';
+    $darkVision = new Darkvision();
+    $traits['Darkvision'] = $darkVision->getTraitArray($history);
+    $dwarvenResilience = new DwarvenResilience();
+    $traits['Dwarven Resilience'] = $dwarvenResilience->getTraitArray($history);
+    $stonecunning = new Stonecunning();
+    $traits['Stonecunning'] = $stonecunning->getTraitArray($history);
   }
 
   // ---------------------------------------------------------------
