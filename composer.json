@@ -4,7 +4,6 @@
     "psr-4": {
       "Components\\PlayerCharacter\\": "src/components/PlayerCharacter",
       "Components\\Race\\": "src/components/Race",
-      "Components\\Race\\Dwarf\\": "src/components/Race/Dwarf",
       "Components\\CharacterClass\\": "src/components/CharacterClass",
       "Components\\CharacterClass\\Fighter\\": "src/components/CharacterClass/Fighter",
       "Components\\CharacterClass\\Bard\\": "src/components/CharacterClass/Bard",
@@ -17,7 +16,9 @@
       "Components\\Spell\\": "src/components/Spell",
       "Components\\Spellbook\\": "src/components/Spellbook",
       "Components\\Dice\\": "src/components/Dice",
-      "Components\\Dice\\DiceTypes\\": "src/components/Dice/DiceTypes"
+      "Components\\Dice\\DiceTypes\\": "src/components/Dice/DiceTypes",
+      "Components\\JSONImporter\\": "src/components/JSONImporter",
+      "Components\\Traits\\": "src/components/Traits"
     }
   },
   "autoload-dev": {

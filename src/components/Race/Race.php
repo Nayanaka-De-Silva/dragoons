@@ -19,4 +19,5 @@ abstract class Race {
   abstract public function getDefaultSpeed();
 
   abstract public function loadProficiencies(Proficiencies &$proficiencyObject);
+  abstract public function loadTraits(array &$traits);
 }

@@ -6,10 +6,14 @@ require_once(__DIR__.'/../../vendor/autoload.php');
 
 use PHPUnit\Framework\TestCase;
 use Components\PlayerCharacter\PlayerCharacter;
-use Components\Race\Dwarf\Dwarf;
+use Components\Race\Dwarf;
+use Components\Race\Elf;
 use Components\Size\Size;
-
-
+use Components\Traits\Darkvision;
+use Components\Traits\DwarvenResilience;
+use Components\Traits\FeyAncestry;
+use Components\Traits\Stonecunning;
+use Components\Traits\Trance;
 
 class PlayerCharacterRaceTest extends TestCase {
   protected PlayerCharacter $testPlayerCharacter;
@@ -73,6 +77,38 @@ class PlayerCharacterRaceTest extends TestCase {
     $this->assertTrue($this->testPlayerCharacter->getProficiencies()->checkLanguageProficiencies("Dwarvish"));
 
     $this->assertTrue($this->testPlayerCharacter->getProficiencies()->checkToolProficiencies($this->toolProficiency));
+  }
+
+  public function testIfAllElvishProficienciesAreLoaded() {
+    $testElfCharacter = new PlayerCharacter('Jojo', 'Drizzt');
+    $testElfCharacter->setRace(new Elf());
+    $this->assertTrue($testElfCharacter->getProficiencies()->checkSkillsProficiencies('Perception'));
+    $this->assertTrue($testElfCharacter->getProficiencies()->checkLanguageProficiencies('Elvish'));
+    $this->assertTrue($testElfCharacter->getProficiencies()->checkLanguageProficiencies('Common'));
+  }
+
+  public function testIfAllElvishTraitsAreLoaded() {
+    $testElfCharacter = new PlayerCharacter('Jojo', 'Drizzt');
+    $testElfCharacter->setRace(new Elf());
+    $testTraits = array('Darkvision' => array('trait' => new Darkvision(), 'from'=>'Elven Race Traits'),
+                        'Trance'=> array('trait' => new Trance(), 'from'=>'Elven Race Traits'),
+                        'Fey Ancestry' => array('trait' => new FeyAncestry(), 'from'=>'Elven Race Traits'));
+    
+    foreach ($testTraits as $traitName => $trait) {
+      $this->assertEquals($testElfCharacter->getTraitFromName($traitName), $trait['trait']);
+    }
+  }
+
+  public function testIfAllDwarvenTraitsAreLoaded() {
+    $testDwarfCharacter = new PlayerCharacter('Jojo', 'Drizzt');
+    $testDwarfCharacter->setRace(new Dwarf());
+    $testTraits = array('Darkvision' => array('trait' => new Darkvision(), 'from'=>'Dwarven Race Traits'),
+                        'Dwarven Resilience' => array('trait' => new DwarvenResilience(), 'from'=>'Dwarven Race Traits'),
+                        'Stonecunning' => array('trait' => new Stonecunning(), 'from'=>'Dwarven Race Traits'));
+    
+    foreach ($testTraits as $traitName => $trait) {
+      $this->assertEquals($testDwarfCharacter->getTraitFromName($traitName), $trait['trait']);
+    }
   }
 
   public function tearDown(): void {
