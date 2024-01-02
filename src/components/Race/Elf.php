@@ -18,6 +18,7 @@ class Elf extends Race {
   private float $DEFAULT_HEIGHT = 5.5;
   private Sizes $DEFAULT_SIZE = Sizes::Medium;
   private int   $DEFAULT_SPEED = 30;
+  protected $DEFAULT_SUB_CLASS = 'HighElf';
   
   private array $abilityScoreIncrease = ['Type'=>'DEX', 'Amount'=>2];
 

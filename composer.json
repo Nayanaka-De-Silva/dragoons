@@ -4,6 +4,7 @@
     "psr-4": {
       "Components\\PlayerCharacter\\": "src/components/PlayerCharacter",
       "Components\\Race\\": "src/components/Race",
+      "Components\\Race\\SubRaces\\": "src/components/Race/SubRaces",
       "Components\\CharacterClass\\": "src/components/CharacterClass",
       "Components\\CharacterClass\\Fighter\\": "src/components/CharacterClass/Fighter",
       "Components\\CharacterClass\\Bard\\": "src/components/CharacterClass/Bard",

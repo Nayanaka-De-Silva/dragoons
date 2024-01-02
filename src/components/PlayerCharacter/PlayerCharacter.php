@@ -7,6 +7,7 @@ use Components\Race\Race;
 use Components\CharacterClass\CharacterClass;
 use Components\Abilities\Abilities;
 use Components\Proficiencies\Proficiencies;
+use Components\Race\SubRace\SubRace;
 use Components\Size\Size;
 use Components\Size\Sizes\Sizes;
 use Components\Speed\Speed;
@@ -56,6 +57,13 @@ class PlayerCharacter {
     $this->setDefaultRaceProperties();
     $this->race->loadProficiencies($this->proficiencies);
     $this->race->loadTraits($this->traits);
+  }
+
+  public function setSubRace(SubRace $subRace = null, $params = array()) {
+    if (!isset($subRace))
+      $subRace = $this->race->getDefaultSubRace();
+    $this->race->setSubRace($subRace);
+    $this->race->getSubRace()->loadSubRaceProficiencies($this->proficiencies, $params);
   }
 
   public function getRace() {

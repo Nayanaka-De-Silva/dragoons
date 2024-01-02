@@ -6,6 +6,8 @@ require_once(__DIR__ . '/../../../vendor/autoload.php');
 
 use Components\Proficiencies\Proficiencies;
 use Components\Race\Race;
+use Components\Race\SubRace\MountainDwarf;
+use Components\Race\SubRace\SubRace;
 use Components\Size\Sizes\Sizes;
 use Components\Traits\Darkvision;
 use Components\Traits\DwarvenResilience;
@@ -18,6 +20,7 @@ class Dwarf extends Race {
   private float $DEFAULT_HEIGHT = 4.0;
   private Sizes $DEFAULT_SIZE = Sizes::Small;
   private int   $DEFAULT_SPEED = 25;
+  protected $DEFAULT_SUB_CLASS = 'MountainDwarf';
   
   private array $abilityScoreIncrease = ['Type'=>'CON', 'Amount'=>2];
 
