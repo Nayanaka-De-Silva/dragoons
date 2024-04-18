@@ -6,7 +6,7 @@ use Components\Proficiencies\Proficiencies;
 
 require_once(__DIR__ . '/../../../../vendor/autoload.php');
 
-class HighElf extends SubRace{
+class HighElf implements SubRace{
   // Default properties
 	public function loadSubRaceProficiencies(Proficiencies &$proficiencyObject, array $params) {
 		$proficiencyObject->addWeaponProficiency('Longsword', 'Elf Weapon Training');

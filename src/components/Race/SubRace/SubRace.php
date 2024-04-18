@@ -6,8 +6,8 @@ require_once(__DIR__ . '/../../../../vendor/autoload.php');
 
 use Components\Proficiencies\Proficiencies;
 
-abstract class SubRace {
+interface SubRace {
   // Default properties
-	abstract public function loadSubRaceProficiencies(Proficiencies &$proficiencyObject, array $params);
-  abstract public function loadSubRaceTraits(array &$traits);
+	public function loadSubRaceProficiencies(Proficiencies &$proficiencyObject, array $params);
+  public function loadSubRaceTraits(array &$traits);
 }

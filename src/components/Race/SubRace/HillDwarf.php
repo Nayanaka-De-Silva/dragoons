@@ -8,7 +8,7 @@ use Components\Race\SubRace\SubRace;
 
 require_once(__DIR__ . '/../../../../vendor/autoload.php');
 
-class MountainDwarf implements SubRace {
+class HillDwarf implements SubRace {
   // Default properties
 	public function loadSubRaceProficiencies(Proficiencies &$proficiencyObject, array $params) {
 		$proficiencyObject->addArmorProficiency('Light Armor', 'Dwarven Armor Training');

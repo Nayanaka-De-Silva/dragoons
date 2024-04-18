@@ -4,8 +4,18 @@ namespace Components\Test\Unit;
 
 require_once(__DIR__ . '/../../vendor/autoload.php');
 
+use Components\Defaults\Defaults;
 use PHPUnit\Framework\TestCase;
 use Components\PlayerCharacter\PlayerCharacter;
+use Components\Race\Race;
+use Components\Race\SubRace\MountainDwarf;
+use Components\Race\SubRace\HillDwarf;
+use Components\Race\Dwarf;
+use Components\Race\SubRace\SubRace;
+use Components\Size\Size;
+use Components\Size\Sizes\Sizes;
+use Components\Speed\Speed;
+use Exception;
 
 class PlayerCharacterTest extends TestCase {
   protected PlayerCharacter $testPlayerCharacter;
@@ -43,8 +53,21 @@ class PlayerCharacterTest extends TestCase {
     $this->assertEquals($this->testWeight, $this->testPlayerCharacter->getWeight());
   }
 
+  public function testIfUnableToLoadSubRaceWithoutLoadingRace(): void {
+    $subRaceStub = $this->createStub(MountainDwarf::class);
+    $this->expectException(Exception::class);
+    $this->testPlayerCharacter->setSubRace($subRaceStub);
+  }
+
   // ----------------------------------------------------------------
   public function tearDown(): void {
     unset($this->testPlayerCharacter);
+  }
+
+  public function RaceSubRaceProvider() {
+    return array(
+      [Dwarf::class, MountainDwarf::class],
+      [Dwarf::class, HillDwarf::class]
+    );
   }
 }

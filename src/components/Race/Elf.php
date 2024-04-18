@@ -6,23 +6,25 @@ require_once(__DIR__ . '/../../../vendor/autoload.php');
 
 use Components\Proficiencies\Proficiencies;
 use Components\Race\Race;
+use Components\Race\SubRace\SubRace;
 use Components\Size\Sizes\Sizes;
 use Components\Traits\Darkvision;
 use Components\Traits\FeyAncestry;
 use Components\Traits\Trance;
 
-class Elf extends Race {
+class Elf implements Race {
   // Class Defaults
   private int   $DEFAULT_AGE = 100;
   private float $DEFAULT_WEIGHT = 65.0; 
   private float $DEFAULT_HEIGHT = 5.5;
   private Sizes $DEFAULT_SIZE = Sizes::Medium;
   private int   $DEFAULT_SPEED = 30;
-  protected $DEFAULT_SUB_CLASS = 'HighElf';
+  protected $DEFAULT_SUB_RACE = 'HighElf';
   
   private array $abilityScoreIncrease = ['Type'=>'DEX', 'Amount'=>2];
-
+  private SubRace $subRace;
   private string $name = 'Elf';
+  
 
   public function getRaceName() {
     return $this->name;
@@ -50,6 +52,10 @@ class Elf extends Race {
     return $this->DEFAULT_SPEED;
   }
 
+  public function getDefaultSubRace() {
+    return $this->DEFAULT_SUB_RACE;
+  }
+
   // ---------------------------------------------------------------
   public function loadProficiencies(Proficiencies &$proficiencyObject) {
     $proficiencyObject->addSkillsProficiency("Perception", "Elven Keen Senses");
@@ -65,6 +71,14 @@ class Elf extends Race {
     $traits['Trance'] = $trance->getTraitArray($history);
     $feyAncestry = new FeyAncestry();
     $traits['Fey Ancestry'] = $feyAncestry->getTraitArray($history);
+  }
+
+  public function setSubRace(SubRace $subRace) {
+    $this->subRace = $subRace;
+  }
+
+  public function getSubRace() : SubRace {
+    return $this->subRace;
   }
 
   // ---------------------------------------------------------------

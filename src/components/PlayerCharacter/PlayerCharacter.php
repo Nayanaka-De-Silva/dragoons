@@ -12,6 +12,7 @@ use Components\Size\Size;
 use Components\Size\Sizes\Sizes;
 use Components\Speed\Speed;
 use Components\Traits\Traits;
+use Exception;
 
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
@@ -54,20 +55,24 @@ class PlayerCharacter {
 
   public function setRace(Race $race) {
     $this->race = $race;
-    $this->setDefaultRaceProperties();
     $this->race->loadProficiencies($this->proficiencies);
     $this->race->loadTraits($this->traits);
-  }
-
-  public function setSubRace(SubRace $subRace = null, $params = array()) {
-    if (!isset($subRace))
-      $subRace = $this->race->getDefaultSubRace();
-    $this->race->setSubRace($subRace);
-    $this->race->getSubRace()->loadSubRaceProficiencies($this->proficiencies, $params);
+    $this->setDefaultRaceProperties();
   }
 
   public function getRace() {
     return $this->race;
+  }
+
+  public function setSubRace(SubRace $subRace, $choices = array()) {
+    if (!isset($this->race))
+      throw new Exception(Defaults::ERR_NO_RACE);
+    $this->race->setSubRace($subRace);
+    $this->race->getSubRace()->loadSubRaceProficiencies($this->proficiencies, $choices);
+  }
+
+  public function getSubRace() : SubRace {
+    return $this->race->getSubRace();
   }
 
   // ----------------------------------------------------------------

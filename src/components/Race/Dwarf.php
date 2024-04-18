@@ -13,21 +13,24 @@ use Components\Traits\Darkvision;
 use Components\Traits\DwarvenResilience;
 use Components\Traits\Stonecunning;
 
-class Dwarf extends Race {
+class Dwarf implements Race {
   // Class Defaults
-  private int   $DEFAULT_AGE = 55;
-  private float $DEFAULT_WEIGHT = 77.0; 
-  private float $DEFAULT_HEIGHT = 4.0;
-  private Sizes $DEFAULT_SIZE = Sizes::Small;
-  private int   $DEFAULT_SPEED = 25;
-  protected $DEFAULT_SUB_CLASS = 'MountainDwarf';
+  private int           $DEFAULT_AGE = 55;
+  private float         $DEFAULT_WEIGHT = 77.0; 
+  private float         $DEFAULT_HEIGHT = 4.0;
+  private Sizes         $DEFAULT_SIZE = Sizes::Small;
+  private int           $DEFAULT_SPEED = 25;
+  private MountainDwarf $DEFAULT_SUB_RACE;
+
+  public function __construct() {
+    $this->DEFAULT_SUB_RACE = new MountainDwarf;
+  }
   
   private array $abilityScoreIncrease = ['Type'=>'CON', 'Amount'=>2];
-
-  private string $name = 'Dwarf';
+  private SubRace $subRace;
 
   public function getRaceName() {
-    return $this->name;
+    return 'Dwarf';
   }
 
   // ----------------------------------------------------------------
@@ -50,6 +53,10 @@ class Dwarf extends Race {
 
   public function getDefaultSpeed() {
     return $this->DEFAULT_SPEED;
+  }
+
+  public function getDefaultSubRace() {
+    return $this->DEFAULT_SUB_RACE;
   }
 
   // ---------------------------------------------------------------
@@ -76,6 +83,14 @@ class Dwarf extends Race {
     $traits['Dwarven Resilience'] = $dwarvenResilience->getTraitArray($history);
     $stonecunning = new Stonecunning();
     $traits['Stonecunning'] = $stonecunning->getTraitArray($history);
+  }
+
+  public function setSubRace(SubRace $subRace) {
+    $this->subRace = $subRace;
+  }
+
+  public function getSubRace() : SubRace {
+    return $this->subRace;
   }
 
   // ---------------------------------------------------------------
