@@ -19,7 +19,7 @@
       "Components\\Dice\\": "src/components/Dice",
       "Components\\Dice\\DiceTypes\\": "src/components/Dice/DiceTypes",
       "Components\\JSONImporter\\": "src/components/JSONImporter",
-      "Components\\Traits\\": "src/components/Traits",
+      "Components\\Feature\\": "src/components/Feature",
       "Components\\Defaults\\":"src/components/Defaults"
     }
   },
