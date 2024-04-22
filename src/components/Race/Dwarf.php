@@ -4,14 +4,15 @@ namespace Components\Race;
 
 require_once(__DIR__ . '/../../../vendor/autoload.php');
 
+use Components\Feature\FeaturesList;
 use Components\Proficiencies\Proficiencies;
 use Components\Race\Race;
 use Components\Race\SubRace\MountainDwarf;
 use Components\Race\SubRace\SubRace;
 use Components\Size\Sizes\Sizes;
-use Components\Traits\Darkvision;
-use Components\Traits\DwarvenResilience;
-use Components\Traits\Stonecunning;
+use Components\Feature\Darkvision;
+use Components\Feature\DwarvenResilience;
+use Components\Feature\Stonecunning;
 
 class Dwarf implements Race {
   // Class Defaults
@@ -60,7 +61,7 @@ class Dwarf implements Race {
   }
 
   // ---------------------------------------------------------------
-  public function loadProficiencies(Proficiencies &$proficiencyObject) {
+  public function loadProficiencies(Proficiencies $proficiencyObject) {
     $proficiencyObject->addWeaponProficiency("Battleaxe",       "Dwarven Combat Training");
     $proficiencyObject->addWeaponProficiency("Handaxe",         "Dwarven Combat Training");
     $proficiencyObject->addWeaponProficiency("Throwing Hammer", "Dwarven Combat Training");
@@ -75,14 +76,11 @@ class Dwarf implements Race {
     $proficiencyObject->addLanguageProficiency("Dwarvish", "Dwarven Language Proficiency");
   }
 
-  public function loadTraits(array &$traits) {
+  public function loadFeatures(FeaturesList $features) {
     $history = 'Dwarven Race Traits';
-    $darkVision = new Darkvision();
-    $traits['Darkvision'] = $darkVision->getTraitArray($history);
-    $dwarvenResilience = new DwarvenResilience();
-    $traits['Dwarven Resilience'] = $dwarvenResilience->getTraitArray($history);
-    $stonecunning = new Stonecunning();
-    $traits['Stonecunning'] = $stonecunning->getTraitArray($history);
+    $features->addFeature(new Darkvision, $history);
+    $features->addFeature(new DwarvenResilience, $history);
+    $features->addFeature(new Stonecunning, $history);
   }
 
   public function setSubRace(SubRace $subRace) {

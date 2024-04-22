@@ -24,17 +24,19 @@ class FeaturesListTest extends TestCase {
 		$this->assertIsArray($this->testFeaturesList->getFeatures(), "FAILED: Method getFeature() does not return an array");
 	}
 
-	public function testIfCanStoreFeatureInFeatureArray() {
-		$traitMock = $this->createMock(Feature::class);
-		$this->testFeaturesList->addFeature($traitMock, "Test Trait");
-		$this->assertArrayHasKey($traitMock::class, $this->testFeaturesList->getFeatures(), "FAILED: Method getFeature() does not contain trait: ".$traitMock::class);
+	public function testCanStoreFeatureInFeatureArray() {
+		$featureMock = $this->createMock(Feature::class);
+		$featureMock->method('getName')->willReturn($featureMock::class);
+		$this->testFeaturesList->addFeature($featureMock, "Test Trait");
+		$this->assertArrayHasKey($featureMock->getName(), $this->testFeaturesList->getFeatures(), "FAILED: Method getFeature() does not contain trait: ".$featureMock->getName());
 	}
 
 	public function testIfAbleToRunGetDescriptionMethodFromFeaturesListGetFeaturesFunction() {
 		$featureMock = $this->createMock(Feature::class);
+		$featureMock->method('getName')->willReturn($featureMock::class);
 		$featureMock->expects($this->once())->method('getDescription');
 		$this->testFeaturesList->addFeature($featureMock, "Test Trait");
-		$this->testFeaturesList->getFeatures()[$featureMock::class]['trait']->getDescription();
+		$this->testFeaturesList->getFeatures()[$featureMock->getName()]['feature']->getDescription();
 	}
 
   // ----------------------------------------------------------------

@@ -8,9 +8,10 @@ use Components\Proficiencies\Proficiencies;
 use Components\Race\Race;
 use Components\Race\SubRace\SubRace;
 use Components\Size\Sizes\Sizes;
-use Components\Traits\Darkvision;
-use Components\Traits\FeyAncestry;
-use Components\Traits\Trance;
+use Components\Feature\Darkvision;
+use Components\Feature\FeyAncestry;
+use Components\Feature\Trance;
+use Components\Feature\FeaturesList;
 
 class Elf implements Race {
   // Class Defaults
@@ -57,20 +58,17 @@ class Elf implements Race {
   }
 
   // ---------------------------------------------------------------
-  public function loadProficiencies(Proficiencies &$proficiencyObject) {
+  public function loadProficiencies(Proficiencies $proficiencyObject) {
     $proficiencyObject->addSkillsProficiency("Perception", "Elven Keen Senses");
     $proficiencyObject->addLanguageProficiency("Common", "Elven Language Proficiency");
     $proficiencyObject->addLanguageProficiency("Elvish", "Elven Language Proficiency");
   }
 
-  public function loadTraits(array &$traits) {
+  public function loadFeatures(FeaturesList $features) {
     $history = 'Elven Race Trait';
-    $darkVision = new Darkvision();
-    $traits['Darkvision'] = $darkVision->getTraitArray($history);
-    $trance = new Trance();
-    $traits['Trance'] = $trance->getTraitArray($history);
-    $feyAncestry = new FeyAncestry();
-    $traits['Fey Ancestry'] = $feyAncestry->getTraitArray($history);
+    $features->addFeature(new Darkvision, $history);
+    $features->addFeature(new Trance, $history);
+    $features->addFeature(new FeyAncestry, $history);
   }
 
   public function setSubRace(SubRace $subRace) {

@@ -7,6 +7,7 @@ require_once(__DIR__.'/../../vendor/autoload.php');
 use PHPUnit\Framework\TestCase;
 use Components\PlayerCharacter\PlayerCharacter;
 use Components\Abilities\Abilities;
+use Components\Race\Elf;
 
 class PlayerCharacterAbilitiesTest extends TestCase {
   protected PlayerCharacter $testPlayerCharacter;
@@ -63,6 +64,13 @@ class PlayerCharacterAbilitiesTest extends TestCase {
 
   public function testIfCanGetTheCharismaScoreOfTheCharacter(): void {
     $this->assertEquals($this->testPlayerCharacter->getAbilities()->getCharismaScore(), $this->testAbilitiesArray['CHA']['score']);
+  }
+
+  public function testIfCanGetCorrectAbilitiesAmountWhenSettingTheRaceToElf(): void {
+    $originalDexScore = $this->testPlayerCharacter->getAbilities()->getDexterityScore();
+    $testElf = new Elf;
+    $this->testPlayerCharacter->setRace($testElf);
+    $this->assertEquals($originalDexScore + $testElf->getAbilityScoreIncreaseAmount(), $this->testPlayerCharacter->getAbilities()->getDexterityScore());
   }
 
   public function tearDown(): void {

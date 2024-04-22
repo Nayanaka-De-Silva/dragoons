@@ -6,12 +6,12 @@ use Components\Defaults\Defaults;
 use Components\Race\Race;
 use Components\CharacterClass\CharacterClass;
 use Components\Abilities\Abilities;
+use Components\Feature\FeaturesList;
 use Components\Proficiencies\Proficiencies;
 use Components\Race\SubRace\SubRace;
 use Components\Size\Size;
 use Components\Size\Sizes\Sizes;
 use Components\Speed\Speed;
-use Components\Traits\Traits;
 use Exception;
 
 require_once(__DIR__ . '/../../../vendor/autoload.php');
@@ -25,7 +25,7 @@ class PlayerCharacter {
   private Abilities $abilities;
   private Speed $speed;
   private Proficiencies $proficiencies;
-  private array $traits;
+  private FeaturesList $featuresList;
 
   // Character basic properties
   private int $age;
@@ -36,10 +36,10 @@ class PlayerCharacter {
   private Size $size;
 
   public function __construct(string $playerName, string $characterName) {
-    $this->playerName = $playerName;
-    $this->characterName = $characterName;
-    $this->proficiencies = new Proficiencies();
-    $this->traits = array();
+    $this->playerName     = $playerName;
+    $this->characterName  = $characterName;
+    $this->proficiencies  = new Proficiencies;
+    $this->featuresList   = new FeaturesList;
   }
 
   public function getPlayerName() {
@@ -52,11 +52,21 @@ class PlayerCharacter {
 
   // ----------------------------------------------------------------
   // Race Methods
-
+  /**
+   * setRace - Set the Race of the Player Character
+   * N.B. The Abilities of the Player Character must be set before setting the race.
+   * This is because there are some races that will modify the abilities scores.
+   *
+   * @param Race $race
+   * @return void
+   */
   public function setRace(Race $race) {
+    if (!isset($this->abilities))
+      throw new Exception(Defaults::ERR_NO_ABILITIES);
     $this->race = $race;
+    $this->abilities->IncreaseAbilityScore($race->getAbilityScoreIncreaseAmount(), $race->getAbilityScoreIncreaseType());
     $this->race->loadProficiencies($this->proficiencies);
-    $this->race->loadTraits($this->traits);
+    $this->race->loadFeatures($this->featuresList);
     $this->setDefaultRaceProperties();
   }
 
@@ -64,11 +74,19 @@ class PlayerCharacter {
     return $this->race;
   }
 
+  /**
+   * setSubRace - Sets the SubRace of the Player Character
+   * N.B. Race must be set when setting the sub-race
+   * @param SubRace $subRace - The Sub Race to be set
+   * @param array $choices - Extra array to allow for different choices by the Player
+   * @return PlayerCharacter
+   */
   public function setSubRace(SubRace $subRace, $choices = array()) {
     if (!isset($this->race))
       throw new Exception(Defaults::ERR_NO_RACE);
     $this->race->setSubRace($subRace);
     $this->race->getSubRace()->loadSubRaceProficiencies($this->proficiencies, $choices);
+    return $this;
   }
 
   public function getSubRace() : SubRace {
@@ -91,13 +109,9 @@ class PlayerCharacter {
     return $this->classes[$classIdx];
   }
   // ----------------------------------------------------------------
-  // Traits
-  public function getTraits() : array {
-    return $this->traits;
-  }
-
-  public function getTraitFromName(string $name) {
-    return $this->traits[$name]['trait'];
+  // Features
+  public function getFeaturesList() : FeaturesList {
+    return $this->featuresList;
   }
 
   // ----------------------------------------------------------------
@@ -138,6 +152,14 @@ class PlayerCharacter {
 
   // ----------------------------------------------------------------
   // Abilities Methods
+  /**
+   * setAbilities - Set the abilities of the Player Character
+   * N.B. The abilities must be set before the Race, so that the appropriate
+   * Ability Score Increases can be applied
+   *
+   * @param Abilities $abilities - Abilities Object
+   * @return PlayerCharacter
+   */
   public function setAbilities(Abilities $abilities): PlayerCharacter {
     $this->abilities = $abilities;
     return $this;

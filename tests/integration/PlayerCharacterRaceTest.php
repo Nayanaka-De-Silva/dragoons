@@ -6,14 +6,15 @@ require_once(__DIR__.'/../../vendor/autoload.php');
 
 use PHPUnit\Framework\TestCase;
 use Components\PlayerCharacter\PlayerCharacter;
+use Components\Abilities\Abilities;
 use Components\Race\Dwarf;
 use Components\Race\Elf;
 use Components\Size\Size;
-use Components\Traits\Darkvision;
-use Components\Traits\DwarvenResilience;
-use Components\Traits\FeyAncestry;
-use Components\Traits\Stonecunning;
-use Components\Traits\Trance;
+use Components\Feature\Darkvision;
+use Components\Feature\DwarvenResilience;
+use Components\Feature\FeyAncestry;
+use Components\Feature\Stonecunning;
+use Components\Feature\Trance;
 
 class PlayerCharacterRaceTest extends TestCase {
   protected PlayerCharacter $testPlayerCharacter;
@@ -21,11 +22,28 @@ class PlayerCharacterRaceTest extends TestCase {
   protected string $testCharacterName = 'Sir Arthas';
   protected Dwarf $testRace;
   protected string $toolProficiency = "Smith's Tools";
+  protected Abilities $testAbilities;
+  protected array $testAbilitiesArray = array(
+    'STR' => ['score' => 14, 'mod' =>  2],
+    'DEX' => ['score' => 13, 'mod' =>  1],
+    'CON' => ['score' => 15, 'mod' =>  2],
+    'INT' => ['score' => 10, 'mod' =>  0],
+    'WIS' => ['score' =>  8, 'mod' => -1],
+    'CHA' => ['score' => 12, 'mod' =>  1]
+  );
 
   public function setUp(): void {
     $this->testPlayerCharacter = new PlayerCharacter($this->testPlayerName, $this->testCharacterName);
     $this->testRace = new Dwarf();
-
+    $this->testAbilities = new Abilities(
+      $this->testAbilitiesArray['STR']['score'],
+      $this->testAbilitiesArray['DEX']['score'],
+      $this->testAbilitiesArray['CON']['score'],
+      $this->testAbilitiesArray['INT']['score'],
+      $this->testAbilitiesArray['WIS']['score'],
+      $this->testAbilitiesArray['CHA']['score']
+    );
+    $this->testPlayerCharacter->setAbilities($this->testAbilities);
     $this->testPlayerCharacter->setRace($this->testRace);
   }
 
@@ -81,33 +99,35 @@ class PlayerCharacterRaceTest extends TestCase {
 
   public function testIfAllElvishProficienciesAreLoaded() {
     $testElfCharacter = new PlayerCharacter('Jojo', 'Drizzt');
+    $testElfCharacter->setAbilities($this->testAbilities);
     $testElfCharacter->setRace(new Elf());
     $this->assertTrue($testElfCharacter->getProficiencies()->checkSkillsProficiencies('Perception'));
     $this->assertTrue($testElfCharacter->getProficiencies()->checkLanguageProficiencies('Elvish'));
     $this->assertTrue($testElfCharacter->getProficiencies()->checkLanguageProficiencies('Common'));
   }
 
-  public function testIfAllElvishTraitsAreLoaded() {
+  public function testIfAllElvishFeaturesAreLoaded() {
     $testElfCharacter = new PlayerCharacter('Jojo', 'Drizzt');
-    $testElfCharacter->setRace(new Elf());
-    $testTraits = array('Darkvision' => array('trait' => new Darkvision(), 'from'=>'Elven Race Traits'),
-                        'Trance'=> array('trait' => new Trance(), 'from'=>'Elven Race Traits'),
-                        'Fey Ancestry' => array('trait' => new FeyAncestry(), 'from'=>'Elven Race Traits'));
+    $testElfCharacter->setAbilities($this->testAbilities);
+    $testElfCharacter->setRace(new Elf);
+    $testFeatures = array('Darkvision'   => array('feature' => new Darkvision,  'from'=>'Elven Race Traits'),
+                          'Trance'       => array('feature' => new Trance,      'from'=>'Elven Race Traits'),
+                          'Fey Ancestry' => array('feature' => new FeyAncestry, 'from'=>'Elven Race Traits'));
     
-    foreach ($testTraits as $traitName => $trait) {
-      $this->assertEquals($testElfCharacter->getTraitFromName($traitName), $trait['trait']);
+    foreach ($testFeatures as $feature) {
+      $this->assertArrayHasKey($feature['feature']->getName(), $testElfCharacter->getFeaturesList()->getFeatures());
     }
   }
 
-  public function testIfAllDwarvenTraitsAreLoaded() {
+  public function testIfAllDwarvenFeaturesAreLoaded() {
     $testDwarfCharacter = new PlayerCharacter('Jojo', 'Drizzt');
-    $testDwarfCharacter->setRace(new Dwarf());
-    $testTraits = array('Darkvision' => array('trait' => new Darkvision(), 'from'=>'Dwarven Race Traits'),
-                        'Dwarven Resilience' => array('trait' => new DwarvenResilience(), 'from'=>'Dwarven Race Traits'),
-                        'Stonecunning' => array('trait' => new Stonecunning(), 'from'=>'Dwarven Race Traits'));
+    $testDwarfCharacter->setAbilities($this->testAbilities)->setRace(new Dwarf());
+    $testFeatures = array('Darkvision'         => array('feature' => new Darkvision(),        'source'=>'Dwarven Race Traits'),
+                          'Dwarven Resilience' => array('feature' => new DwarvenResilience(), 'source'=>'Dwarven Race Traits'),
+                          'Stonecunning'       => array('feature' => new Stonecunning(),      'source'=>'Dwarven Race Traits'));
     
-    foreach ($testTraits as $traitName => $trait) {
-      $this->assertEquals($testDwarfCharacter->getTraitFromName($traitName), $trait['trait']);
+    foreach ($testFeatures as $feature) {
+      $this->assertArrayHasKey($feature['feature']->getName(), $testDwarfCharacter->getFeaturesList()->getFeatures());
     }
   }
 

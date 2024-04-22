@@ -27,6 +27,6 @@ final class FeaturesList {
 	}
 
 	public function addFeature(Feature $newFeature, string $source) : void {
-		$this->features[$newFeature::class] = array('trait' => $newFeature, 'source' => $source);
+		$this->features[$newFeature->getName()] = array('feature' => $newFeature, 'source' => $source);
 	}
 }
