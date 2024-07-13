@@ -20,7 +20,10 @@
       "Components\\Dice\\DiceTypes\\": "src/components/Dice/DiceTypes",
       "Components\\JSONImporter\\": "src/components/JSONImporter",
       "Components\\Feature\\": "src/components/Feature",
-      "Components\\Defaults\\":"src/components/Defaults"
+      "Components\\Defaults\\":"src/components/Defaults",
+      "Components\\NonPlayerCharacter\\":"src/components/NonPlayerCharacter",
+      "Components\\Type\\":"src/components/Type",
+      "Components\\Alignment\\":"src/components/Alignment"
     }
   },
   "autoload-dev": {
