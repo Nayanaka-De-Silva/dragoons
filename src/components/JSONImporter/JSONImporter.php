@@ -17,7 +17,7 @@ class JSONImporter {
 
 	public static function importFromJSON(string $jsonFilePath) {
 		if (!JSONImporter::checkIfFilePathIsValid($jsonFilePath))
-			throw new InvalidArgumentException("Cannot Find spells.json file in local directory. Current Path: ".$jsonFilePath);
+			throw new InvalidArgumentException("Cannot Find file $jsonFilePath in local directory. Current Path: ".$jsonFilePath);
 		
 		$jsonString = file_get_contents($jsonFilePath);
 		

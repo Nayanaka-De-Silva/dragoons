@@ -5,6 +5,7 @@ namespace Components\NonPlayerCharacter;
 use Components\Abilities\Abilities;
 use Components\Alignment\Alignment;
 use Components\Alignment\Alignments;
+use Components\ChallengeRating\ChallengeRating;
 use Components\Defaults\Defaults;
 use Components\Size\Size;
 use Components\Type\Type;
@@ -15,6 +16,7 @@ class NonPlayerCharacter {
 	private Type $type;
 	private Alignment $alignment;
 	private Abilities $abilities;
+	private ChallengeRating $challengeRating;
 
 	public function __construct(string $name = null) {
 		$this->name = $name ?? '';
@@ -74,5 +76,13 @@ class NonPlayerCharacter {
 
 	public function getAbilities() {
 		return $this->abilities;
+	}
+
+	public function setChallengeRating(ChallengeRating $challengeRating) {
+		$this->challengeRating = $challengeRating;
+	}
+
+	public function getChallengeRating(): ChallengeRating {
+		return $this->challengeRating;
 	}
 }

@@ -6,6 +6,7 @@ require_once(__DIR__ . '/../../vendor/autoload.php');
 
 use Components\Abilities\Abilities;
 use Components\Alignment\Alignment;
+use Components\ChallengeRating\ChallengeRating;
 use PHPUnit\Framework\TestCase;
 use Components\NonPlayerCharacter\NonPlayerCharacter;
 use Components\Defaults\Defaults;
@@ -98,6 +99,14 @@ class NonPlayerCharacterTest extends TestCase {
 		$abilityScoreMock->method('getCharismaModifier')->willReturn($chaScore);
 		$this->testNpc->setAbilities($abilityScoreMock);
 		$this->assertEquals($chaScore, $this->testNpc->getAbilities()->getCharismaModifier());
+	}
+
+	public function testCanGetChallengeRatingFromNonPlayerCharacter() {
+		$proficiencyBonus = '4';
+		$challengeRatingMock = $this->createMock(ChallengeRating::class);
+		$challengeRatingMock->method('getProficiencyBonus')->willReturn($proficiencyBonus);
+		$this->testNpc->setChallengeRating($challengeRatingMock);
+		$this->assertEquals($proficiencyBonus, $this->testNpc->getChallengeRating()->getProficiencyBonus());
 	}
 
 	public static function alignmentProvider(): array {
