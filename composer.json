@@ -1,5 +1,7 @@
 {
+  "name": "ntech/dragoons",
   "description": "A D&D Dungeon Master Management Tool",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "Components\\PlayerCharacter\\": "src/components/PlayerCharacter",
