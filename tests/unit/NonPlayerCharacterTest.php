@@ -4,7 +4,9 @@ namespace Components\Test\Unit;
 
 require_once(__DIR__ . '/../../vendor/autoload.php');
 
+use Components\Abilities\Abilities;
 use Components\Alignment\Alignment;
+use Components\ChallengeRating\ChallengeRating;
 use PHPUnit\Framework\TestCase;
 use Components\NonPlayerCharacter\NonPlayerCharacter;
 use Components\Defaults\Defaults;
@@ -75,6 +77,36 @@ class NonPlayerCharacterTest extends TestCase {
 		$this->expectExceptionMessage(Defaults::ERR_NO_ALIGNMENT);
 		$testNpc = new NonPlayerCharacter;
 		$testNpc->getAlignment();
+	}
+
+	public function testCanStoreAbilityScoreToNonPlayerCharacter() {
+		$abilityScoreMock = $this->createMock(Abilities::class);
+		$this->testNpc->setAbilities($abilityScoreMock);
+		$this->assertEquals($abilityScoreMock, $this->testNpc->getAbilities());
+	}
+
+	public function testCanGetDexterityModifierFromAbilitiesMock() {
+		$dexScore = 12;
+		$abilityScoreMock = $this->createMock(Abilities::class);
+		$abilityScoreMock->method('getDexterityScore')->willReturn($dexScore);
+		$this->testNpc->setAbilities($abilityScoreMock);
+		$this->assertEquals($dexScore, $this->testNpc->getAbilities()->getDexterityScore());
+	}
+
+	public function testCanGetCharismaModifierFromAbilitiesMock() {
+		$chaScore = 15;
+		$abilityScoreMock = $this->createMock(Abilities::class);
+		$abilityScoreMock->method('getCharismaModifier')->willReturn($chaScore);
+		$this->testNpc->setAbilities($abilityScoreMock);
+		$this->assertEquals($chaScore, $this->testNpc->getAbilities()->getCharismaModifier());
+	}
+
+	public function testCanGetChallengeRatingFromNonPlayerCharacter() {
+		$proficiencyBonus = '4';
+		$challengeRatingMock = $this->createMock(ChallengeRating::class);
+		$challengeRatingMock->method('getProficiencyBonus')->willReturn($proficiencyBonus);
+		$this->testNpc->setChallengeRating($challengeRatingMock);
+		$this->assertEquals($proficiencyBonus, $this->testNpc->getChallengeRating()->getProficiencyBonus());
 	}
 
 	public static function alignmentProvider(): array {
