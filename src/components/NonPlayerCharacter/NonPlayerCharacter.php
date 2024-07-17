@@ -2,6 +2,7 @@
 
 namespace Components\NonPlayerCharacter;
 
+use Components\Abilities\Abilities;
 use Components\Alignment\Alignment;
 use Components\Alignment\Alignments;
 use Components\Defaults\Defaults;
@@ -13,6 +14,7 @@ class NonPlayerCharacter {
 	private Size $size;
 	private Type $type;
 	private Alignment $alignment;
+	private Abilities $abilities;
 
 	public function __construct(string $name = null) {
 		$this->name = $name ?? '';
@@ -64,5 +66,13 @@ class NonPlayerCharacter {
 	public function setAlignment(Alignment $alignment) {
 		$this->alignment = $alignment;
 		return $this;
+	}
+
+	public function setAbilities(Abilities $abilities) {
+		$this->abilities = $abilities;
+	}
+
+	public function getAbilities() {
+		return $this->abilities;
 	}
 }
