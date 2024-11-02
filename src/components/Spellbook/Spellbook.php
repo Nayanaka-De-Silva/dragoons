@@ -17,6 +17,18 @@ class Spellbook {
 		$this->spellList = $this->loadSpellsFromSpellArray($spellArray);
 	}
 
+	/**
+	 * Retrieves the list of spells.
+	 * 
+	 * For now, it returns a list of spells as Spell Objects
+	 * It is up to the user of the component to decide how to use the list.
+	 *
+	 * @return array An array containing the list of spells.
+	 */
+	public function getSpellList() : array {
+		return $this->spellList;
+	}
+
 	public function searchSpellByName($spellName) {
 		return $this->spellList[$spellName] ?? "Spell not found in Spell List.";
 	}

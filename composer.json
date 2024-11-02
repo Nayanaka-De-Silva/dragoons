@@ -27,7 +27,8 @@
       "Components\\Type\\":"src/components/Type",
       "Components\\Alignment\\":"src/components/Alignment",
       "Components\\ChallengeRating\\":"src/components/ChallengeRating",
-      "Components\\InitiativeTracker\\":"src/components/InitiativeTracker"
+      "Components\\InitiativeTracker\\":"src/components/InitiativeTracker",
+      "Commands\\":"src/commands"
     }
   },
   "autoload-dev": {
@@ -40,5 +41,8 @@
   },
   "require-dev": {
     "phpunit/phpunit": "10.*"
+  },
+  "require": {
+    "symfony/console": "^6.4"
   }
 }
