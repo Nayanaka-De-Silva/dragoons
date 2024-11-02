@@ -44,63 +44,63 @@ class SpellTest extends TestCase {
 		$this->testSpell = new Spell($this->testSpellDetails);
   }
 
-	public function testIfCanGetSpellName() {
+	public function testCanGetSpellName() {
 		$this->assertEquals($this->testSpellDetails['name'], $this->testSpell->getName());
 	}
 
-	public function testIfCanGetSpellDesc() {
+	public function testCanGetSpellDesc() {
 		$this->assertEquals($this->testSpellDetails['desc'], $this->testSpell->getDesc());
 	}
 
-	public function testIfCanGetSpellHigherLevelDetails() {
+	public function testCanGetSpellHigherLevelDetails() {
 		$this->assertEquals($this->testSpellDetails['higher_level'], $this->testSpell->getHigherLevel());
 	}
 
-	public function testIfCanGetSpellPage() {
+	public function testCanGetSpellPage() {
 		$this->assertEquals($this->testSpellDetails['page'], $this->testSpell->getPage());
 	}
 
-	public function testIfCanGetSpellRange() {
+	public function testCanGetSpellRange() {
 		$this->assertEquals($this->testSpellDetails['range'], $this->testSpell->getRange());
 	}
 
-	public function testIfCanGetSpellComponenets() {
+	public function testCanGetSpellComponenets() {
 		$this->assertEquals(explode(", ", $this->testSpellDetails['components']), $this->testSpell->getComponents());
 	}
 
-	public function testIfCanGetIfSpellIsRitual() {
+	public function testCanGetIfSpellIsRitual() {
 		$this->assertEquals($this->testSpellDetails['ritual'] != "no" ? true : false, $this->testSpell->getRitual());
 	}
 
-	public function testIfCanGetSpellDuration() {
+	public function testCanGetSpellDuration() {
 		$this->assertEquals($this->testSpellDetails['duration'], $this->testSpell->getDuration());
 	}
 
-	public function testIfCanGetIfSpellRequiresConcentration() {
+	public function testCanGetIfSpellRequiresConcentration() {
 		$this->assertEquals($this->testSpellDetails['concentration'] != "no" ? true : false, $this->testSpell->getConcentration());
 	}
 
-	public function testIfCanGetCastingTime() {
+	public function testCanGetCastingTime() {
 		$this->assertEquals($this->testSpellDetails['casting_time'], $this->testSpell->getCastingTime());
 	}
 
-	public function testIfCanGetSpellLevel() {
+	public function testCanGetSpellLevel() {
 		$this->assertEquals($this->testSpellDetails['level'], $this->testSpell->getLevel());
 	}
 
-	public function testIfCanGetSpellSchool() {
+	public function testCanGetSpellSchool() {
 		$this->assertEquals($this->testSpellDetails['school'], $this->testSpell->getSchool());
 	}
 
-	public function testIfCanGetSpellClasses() {
+	public function testCanGetSpellClasses() {
 		$this->assertEquals(explode(", ", $this->testSpellDetails['classes']), $this->testSpell->getClasses());
 	}
 
-	public function testIfCanLoadACantrip() {
+	public function testCanLoadACantrip() {
 		$this->assertInstanceOf(Spell::class, new Spell($this->testCantrip));
 	}
 
-	public function testIfCanPrintLoadedSpellAsArray() {
+	public function testCanPrintLoadedSpellAsArray() {
 		$testSpellArray = array(
 			"name" => "Magic Missile",
 			"desc" => "You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.",
