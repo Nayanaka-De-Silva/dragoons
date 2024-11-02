@@ -26,7 +26,8 @@
       "Components\\NonPlayerCharacter\\":"src/components/NonPlayerCharacter",
       "Components\\Type\\":"src/components/Type",
       "Components\\Alignment\\":"src/components/Alignment",
-      "Components\\ChallengeRating\\":"src/components/ChallengeRating"
+      "Components\\ChallengeRating\\":"src/components/ChallengeRating",
+      "Components\\InitiativeTracker\\":"src/components/InitiativeTracker"
     }
   },
   "autoload-dev": {
